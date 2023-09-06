@@ -76,20 +76,16 @@ donde $\vec{n} = (n_{1},...,n_{k})$.
 
 La función $resto$ se define de la siguiente forma:
 
-$resto(n,m)=\left\{
-\begin{array}{cc}
-    \text{el resto de dividir $m$ por $n$}&\text{si }\neq 0\\
+$resto(n,m)=
+\begin{cases}
+    \text{el resto de dividir $m$ por $n$}&\text{si }n \neq 0,\\
     m&\text{si }n = 0\\
-\end{array}
-\right.$
+\end{cases}
+$
 
 Se deben entregar los ficheros \texttt{practica1.tex} y \texttt{practica1.pdf} (la demostración se debe escribit en latex).
 
 \end{itemize}
-
-
-
-
 
 \newpage
 Se observa que $f(n,m) = \overline{sg}(resto(n,m))$, donde
