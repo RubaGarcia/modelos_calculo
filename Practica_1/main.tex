@@ -1,0 +1,204 @@
+%%***************************************************
+\documentclass[a4paper,12pt]{article}
+
+%% PACKAGES
+\usepackage{amssymb}% to have some extra types of fonts
+%% - writing in Spanish
+\usepackage[utf8]{inputenc}% To type Spanish accents
+\usepackage[spanish]{babel}% to have Spanish captions
+%% - doc. formatting
+\usepackage[a4paper,left=3.1cm,right=3.1cm,bottom=2.5cm,top=2.5cm]{geometry}
+%% - headings
+\usepackage{fancyhdr}
+%% - last page
+\usepackage{lastpage}
+%% - Hyperref
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+
+
+%% Headings and footing code
+\fancyhead[L]{Universidad de Cantabria}
+\fancyhead[C]{Grado en Matemáticas}
+\fancyhead[R]{Grado en Ing. Informática}
+\fancyfoot[R]{\thepage/\pageref{LastPage}}
+\fancyfoot[C]{}
+
+
+\title{\large{\textsc{Modelos de cálculo}} \\ \vspace{-2mm} \Large{Práctica 1}}
+
+\author{Rubén García \and Javier Mier \and Yuhua Zhan}
+\date{}
+
+\pagestyle{fancy}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{fancy}
+
+El objetivo de esta práctica es demostrar de manera formal que la función
+
+$f: \mathbb{N} ^{2}\rightarrow \mathbb {N}$ definida por
+
+$f(n,m)=\left\{
+\begin{array}{cc}
+    1&\text{si }resto(n,m) = 0\\
+    0&\text{si }resto(n,m) \neq 0\\
+\end{array}
+\right.$
+
+es primitiva recursiva (PR), sabiendo que:
+
+Las funciones iniciales (a)-(c) son $primitivas recursivas$
+\begin{itemize}
+\item[(a)] La \textit{función cero} $z(n)=0, \forall n \in \mathbb {N} $
+\item [(b)] La \textit{función sucesor} $s(n)=n+1, \forall n \in \mathbb {N} $
+\item[(c)] La \textit{función proyección}:
+
+$p^{k}_{i}(n_{1},...,n_{k})=n_{i},\forall k \in \mathbb {N}^{*},n_{1},...,n_{k} \in \mathbb{N}, \forall k \in {1,...,k}$
+
+Dadas $g_1,g_2,h,h_0,...,h_l$
+funciones primitivas recursivas, también lo son $f_1 :
+\mathbb{N}^{k} \rightarrow \mathbb{N} y f_2: \mathbb{N}^{k+1} \rightarrow \mathbb{N}$ obtenidas a través
+
+\item[(d)] de la \textit{composición}, $f_1(\vec{n}) = g_1(h_0(\vec{n}),...,h_l(\vec{n})),$ o
+
+\item[(e)] de la \textit{recursión primitiva}: 
+
+$f_2(\vec{n},0) = g_2(\vec{n})$,
+
+$f_2(\vec{n},m+1) = h(\vec{n},m,f_2(\vec{n},m))$, 
+
+donde $\vec{n} = (n_{1},...,n_{k})$.
+
+La función $resto$ se define de la siguiente forma:
+
+$resto(n,m)=\left\{
+\begin{array}{cc}
+    \text{el resto de dividir $m$ por $n$}&\text{si }\neq 0\\
+    m&\text{si }n = 0\\
+\end{array}
+\right.$
+
+Se deben entregar los ficheros \texttt{practica1.tex} y \texttt{practica1.pdf} (la demostración se debe escribit en latex).
+
+\end{itemize}
+
+
+
+
+
+\newpage
+Se observa que $f(n,m) = \overline{sg}(resto(n,m))$, donde
+
+
+$\overline{sg}(n):=
+\begin{cases}
+1, & \text{ si } n = 0 \\
+0, & \text{ si } n \neq 0
+\end{cases}
+$
+
+
+Por lo tanto, si probásemos $\overline{sg}$ y \textit{resto} son primitivas recursivas(PR), podríamos concluir que $f$ también lo es (cf.\textit{(d)}).
+
+Empezamos con las funciones básicas $suma,mult,pred,resta,abs,sg,$ definidas a continuación
+\begin{itemize}
+    \item $suma(n, m):=n+m$
+    
+    \item $mult(n, m):=n * m$
+    
+    \item $pred(n):= 
+    \begin{cases}n-1, & \text { si } n \geq m \\
+    0, & \text { si } n<m
+    \end{cases}$
+    
+    \item $resta(n, m):= 
+    \begin{cases}n-m, & \text { si } n \geq m \\
+    0, & \text { si } n<m
+    \end{cases}$
+    
+    \item $abs(n, m):= 
+    \begin{cases}n-m, & \text { si } n \geq m \\
+    m-n, & \text { si } n<m
+    \end{cases}$
+    
+    \item $s g(n):= 
+    \begin{cases}0, & \text { si } n=0 \\
+    1, & \text { si } n \neq 0
+    \end{cases}$
+    
+\end{itemize}
+
+Vamos a mostrar que todas estas funciones son PR:
+
+$\begin{cases}suma(n,0)=n=p^{1}_{1}(n) \text{ es PR por \textit{(c)}} \\
+suma(n,m + 1) = h^{1}(n,m,suma(n,m)),
+\end{cases}$
+
+donde $h^{1}(x,y,z):=s(p_{3}^{3}(x,y,z))$ es una función PR por \textit{(b)},\textit{(c)} y \textit{(d)}
+
+Por lo tanto, suma es una función PR por \textit{(e)}.
+
+$\begin{cases}mult(n,0)=0=z(n) \text{ es PR por \textit{(a)}} \\
+mult(n,m + 1) = h^{2}(n,m,mult(n,m)),
+\end{cases}$
+
+donde $h^{2}(x,y,z):=suma(p^{3}_{1}(x,y,z), p_{3}^{3}(x,y,z))$ es una función PR por  \textit{(c)},\textit{(d)} y porque \textit{suma} es PR
+
+Por lo tanto, \textit{mult} es una función PR por \textit{(e)}.
+
+$\begin{cases}pred(0)=0 \text{ es PR por ser constante} \\
+pred(m + 1) = h^{3}(m,pred(m)),
+\end{cases}$
+
+donde $h^{3}(x,y):= p_{1}^{2}(x,y)$ es una función PR por \textit{(c)}.
+
+Por lo tanto, \textit{pred} es una función PR por \textit{(e)}.
+
+$\begin{cases}resta(n,0)=n=p^{1}_{1}(n) \text{ es PR por \textit{(c)}} \\
+resta(n,m + 1) = h^{4}(n,m,resta(n,m)),
+\end{cases}$
+
+donde $h^{4}.=pred(p_{3}^{3}(x,y,z)))$ es una función PR por \textit{(c)},\textit{(d)} y porque \textit{pred} es PR.
+
+Por lo tanto, \textit{resta} es una función PR por \textit{(e)}.
+
+$abs(n,m)=suma(resta(n,m),h^{5}(n,m))$
+
+donde $h^{5}(x,y):=resta(p_{2}^{2}(x,y),p_{1}^{2}(x,y))$ es una función PR por \textit{(c)},\textit{(d)} y porque \textit{resta} es PR
+
+Por lo tanto, \textit{abs} es una funcion PR por \textit{(d)}
+
+$\begin{cases}sg(0)=0 \text{ es PR por ser constante} \\
+sg(m + 1) = h^{6}(m,sg(m)),
+\end{cases}$
+
+donde $h^{6}(x,y) := 1 =s(z(p_{1}^{2}(x,y)))$ es una función PR por \textit{(a)},\textit{(b)},\textit{(c)} y \textit{(d)}.
+
+Por lo tanto, \textit{sg} es una función PR por \textit{(e)}.
+
+
+Falta por demostrar que las funciones $\overline{sg}$ y $resto$ también son PR.
+
+$\overline{sg}(n) = resta(s(z(n)), sg(n))$, y, por lo tanto, $\overline{sg}$ es una función PR por \textit{(a),(b),(d)} y porque $resta$ y $sg$ son funciones PR.
+
+    $\begin{cases}
+    resto(n,0) = 0 = z(n) \mbox{es PR por \textit{(a)}}\\
+    resto(n,m+1) = h(n,m,resto(n,m)),
+    \end{cases}$
+    
+donde $h(x,y,z) = mult(h^{7}(x,y,z),h^{8}(x,y,z)), h^{7}(x,y,z) = s(p^{3}_{3}(x,y,z)), h^{8}(x,y,z) = sg(abs(p^{3}_{1}(x,y,z),s(p^{3}_{3}(x,y,z))))$ son funciones PR:
+
+\begin{itemize}
+    \item $h^{7}$ es una función PR por \textit{(b), (c)} y \textit{(d)}
+    \item $h^{8}$ en una función PR por \textit{(b), (c), (d)} y porque $sg$ y $abs$ son funciones PR.
+    \item $h$ es una función PR por \textit{(d)} y porque $h^{7}, h^{8}$ y $mult$ son funciones PR.
+\end{itemize}
+
+Por lo tanto, $resto$ es una función PR por \textit{(e)}.
+
+\end{document}
