@@ -3,6 +3,9 @@ Z(n): r[n]=0
 S(n):r[n]=r[n]+1
 T(m,n): r[n]=r[m]
 J(m,n,q): if r[n]=r[m] go to instruction q, else go to next instruction
+
+
+python URM.py function.txt 5 5
 """
 import re
 
