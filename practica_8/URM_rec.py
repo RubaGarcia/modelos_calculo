@@ -95,9 +95,10 @@ if __name__ == "__main__":
             result=runURM(listofinstr,reg)
             
             print("Output: %s"%result)
-            calc = math.factotial(rango1)+(rango2*(rango2-1/2))
+            calc = math.factorial(reg[0])+(reg[1]*(reg[1]-1//2))
             if result != calc:
-                print("Error: the result is not correct")
+                print("Error: the result is not correct, deberia ser %s"%calc)
+                break
 
 
 
