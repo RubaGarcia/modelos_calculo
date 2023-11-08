@@ -8,6 +8,7 @@ J(m,n,q): if r[n]=r[m] go to instruction q, else go to next instruction
 python URM.py function.txt 5 5
 """
 import re
+import math
 
 def runURM(listofinstr,reg):
     """
@@ -92,7 +93,12 @@ if __name__ == "__main__":
         for reg in listofreg:
             print("Initial configuration of registers: "+" ".join([str(i) for i in reg]))
             result=runURM(listofinstr,reg)
+            
             print("Output: %s"%result)
+            calc = math.factotial(rango1)+(rango2*(rango2-1/2))
+            if result != calc:
+                print("Error: the result is not correct")
+
 
 
 
