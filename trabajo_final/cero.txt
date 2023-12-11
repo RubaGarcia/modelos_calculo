@@ -1,0 +1,10 @@
+cinta: aaa    Alfabeto:{0, 1, E}
+
+Producciones:           Computacion
+0->1                    E1010101             ->n=3
+1->1                      0101011            
+E->1                        010111           
+                              01111     
+                                1111
+                                  111
+                                    1       <halt> (n=0)
